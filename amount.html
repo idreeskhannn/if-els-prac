@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>withdraw amount</h1>
+    <form onsubmit="withdraw(); return false">
+        Enter your amount to withdraw:
+        <input type="number" id="userInputAmount" required>
+        <button>WithDraw</button>
+
+    </form>
+    <script>
+        let moneyBox = 22000;
+        let cardDailyLimit = 20000;
+        let accountBalance = 50000;
+        
+        function withdraw() {
+            console.log("hui");
+            let amount = document.querySelector("#userInputAmount").value;
+            let newAmount = amount%500
+            if (amount <= 500) {
+
+                alert("enter morethan is RS :500");
+                return;
+            }
+            if (newAmount !==0) {
+
+                alert("amount divide by 500");
+                return;
+            }
+            if (amount > moneyBox) {
+                console.log("this machine dont have enough money, please try smaller amount");
+                return;
+            }
+            if (amount > cardDailyLimit) {
+
+                alert("limit amount is 20000, please enter less or eqaul 20000");
+                return;
+            }
+
+            if (amount <= cardDailyLimit) {
+                alert(`congratulation withdraw of RS : ${amount}  remaining balance is RS :${accountBalance - amount}`);
+                return;
+            }
+            // if (amount /500) {
+
+            //     alert("limit amount is 20000, please enter less or eqaul 20000");
+            //     return;
+            // }
+
+        }
+    </script>
+</body>
+
+</html>
