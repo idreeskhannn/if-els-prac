@@ -8,54 +8,101 @@
     <title>Document</title>
 </head>
 
-<body>
+<body style="text-align: center;">
     <h1>withdraw amount</h1>
-    <form onsubmit="withdraw(); return false">
+    <form onsubmit="withdraw(); return false" style="margin-bottom:100px;">
         Enter your amount to withdraw:
         <input type="number" id="userInputAmount" required>
         <button>WithDraw</button>
+        <h3 id="p" style="color: red;"></h3>
 
     </form>
+    <h1 id="wi"></h1>
+    <h1 id="rem"></h1>
+    <h1 id="withdraw"></h1>
+    <h1 id="with"></h1>
+
+
+
+
     <script>
-        let moneyBox = 22000;
+        let moneyBox = 50000;
         let cardDailyLimit = 20000;
-        let accountBalance = 50000;
-        
+        let accountBalance = 20000;
+
         function withdraw() {
             console.log("hui");
             let amount = document.querySelector("#userInputAmount").value;
-            let newAmount = amount%500
-            if (amount <= 500) {
+            let newAmount = amount % 500
+            if (accountBalance === 0) {
+                document.getElementById("p").innerHTML=`* account balance is ${accountBalance} *`
+                return
+            }
+            if (amount < 500) {
 
-                alert("enter morethan is RS :500");
-                return;
-            }
-            if (newAmount !==0) {
+                document.getElementById("p").innerHTML=`* enter morethan  RS :499 *`
 
-                alert("amount divide by 500");
                 return;
             }
-            if (amount > moneyBox) {
-                console.log("this machine dont have enough money, please try smaller amount");
+            if (newAmount !== 0) {
+
+                document.getElementById("p").innerHTML=`* amount divide by 500 *`
                 return;
+
             }
+            // if (amount > accountBalance) {
+            //     alert(`your account balance is ${accountBalance} please enter amount according to your account balance`)
+            //     return
+            // }
             if (amount > cardDailyLimit) {
 
-                alert("limit amount is 20000, please enter less or eqaul 20000");
+                document.getElementById("p").innerHTML=`* limit amount is 20000 *`
+
+                return;
+            }
+            if (moneyBox === 0) {
+                alert("ATM is empty....")
+                return
+            }
+            if (amount > moneyBox) {
+                alert(`Money box ${moneyBox}, try under limit of mony box`)
                 return;
             }
 
-            if (amount <= cardDailyLimit) {
-                alert(`congratulation withdraw of RS : ${amount}  remaining balance is RS :${accountBalance - amount}`);
-                return;
-            }
-            // if (amount /500) {
-
-            //     alert("limit amount is 20000, please enter less or eqaul 20000");
+            // if (amount > cardDailyLimit) {
+            //     // document.getElementById("rem").innerHTML=(`congratulation withdraw of RS : ${amount}  remaining balance is RS :${accountBalance - amount}`);
+            //     alert("card limit is 20000")
             //     return;
             // }
 
+            else {
+                //   document.getElementById("rem").innerHTML=accountBalance
+                moneyBox = moneyBox - amount;
+                cardDailyLimit = cardDailyLimit - amount;
+                accountBalance = accountBalance - amount;
+                let a = document.getElementById("wi").innerHTML = `withdraw : RS ${amount}`
+                document.getElementById("rem").innerHTML = `your account balance : RS ${accountBalance}`
+                document.getElementById("withdraw").innerHTML = `money box : RS ${moneyBox}`
+                //    let num = Number(a)
+
+
+                // document.getElementById("with").innerHTML = `Account limit : RS ${cardDailyLimit}`
+                return
+            }
+
+
+
         }
+        // document.getElementById("rem").innerHTML = `your account balance : RS ${accountBalance}`
+        // document.getElementById("with").innerHTML = `Account limit : RS ${cardDailyLimit}`
+        // document.getElementById("withdraw").innerHTML = `money box : RS ${moneyBox}`
+
+
+
+
+
+
+
     </script>
 </body>
 
